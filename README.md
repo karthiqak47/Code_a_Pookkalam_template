@@ -1,4 +1,4 @@
-# 🌸 Code-a-Pookkalam 🌸
+# 🌸 Code-a-Pookkalam
 
 Ever wanted to make a traditional Pookkalam but your flower-arranging skills are... let's say "questionable"? 
 Well, now you can create a stunning digital pookkalam using the ancient art of HTML and CSS!
