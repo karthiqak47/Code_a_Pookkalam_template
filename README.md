@@ -21,8 +21,8 @@ Edit `styles.css` and create your masterpiece!
 
 For detailed instructions and guidelines, please refer to:
 
-- **[https://code-a-pookalam-guide.netlify.app/]()** - Complete guide and judging criteria
-- **[https://thecompletegitguide.netlify.app/]()** - Learn Git/Github the fun way
+- **[Complete guide and judging criteria](https://code-a-pookalam-guide.netlify.app/)**
+- **[Learn Git/Github the fun way](https://thecompletegitguide.netlify.app/)**
 
 ---
 
