@@ -1,29 +1,29 @@
-# 🌸 Code-a-Pookkalam
+# 🌸 Code-a-Pookkalam 🌸
 
-Ever wanted to make a traditional Pookkalam but your flower-arranging skills are... let's say "questionable"? 
-Well, now you can create a stunning digital pookkalam using the ancient art of HTML and CSS!
-
-## Getting Started 🚀
-
-### 1. Fork this repository
-Click the **Fork** button at the top of this page
-
-### 2. Clone your fork
-```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-cd YOUR-REPO-NAME
-```
-
-### 3. Start coding!
-Edit `styles.css` and create your masterpiece!
-
-## Resources 📚
-
-For detailed instructions and guidelines, please refer to:
-
-- **[Complete guide to Code a Pookkalam](https://code-a-pookalam-guide.netlify.app/)**
-- **[Learn Git/Github the fun way](https://thecompletegitguide.netlify.app/)**
+A digital version of the traditional **Onam Pookkalam** 🪷, created entirely using **HTML, CSS, and JavaScript**.  
+This project lets you experiment with petal arrangements, emoji borders, and concentric rings — bringing the festival spirit online! 🎉
 
 ---
 
-**Happy coding!** 🎉👨‍💻👩‍💻
+## 🌿 Live Demo
+👉 [View my Pookkalam here](https://your-username.github.io/code-a-pookkalam/)  
+*(replace `your-username` and repo name once GitHub Pages is enabled)*
+
+---
+
+## 🖼️ Preview
+![Preview of Pookkalam](screenshot.png)  
+*(Take a screenshot of your design, save it as `screenshot.png` in the repo root, and it will show up here)*
+
+---
+
+## ✨ Features
+- Interactive sliders to adjust petal counts  
+- Emoji borders around each ring 🌸🌻🌹🪷🌺💐  
+- Randomize button for surprise patterns 🎲  
+- Beautiful green background inspired by Onam traditions 🌿  
+- Works directly in the browser, no installation needed  
+
+---
+
+## 📂 Project Structure
