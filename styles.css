@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +6,116 @@
 }
 
 body {
-  background-color: #fff7f9; 
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
+}
+
+/* Title */
+.title {
+  margin: 20px 0;
+  font-size: 2.5rem;
+  color: #fdfdfd;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+/* Pookkalam Container */
+.pookalam-container {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pookalam {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 125, 107, 0.3) 0%, rgba(101, 88, 76, 0.2) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    inset 0 0 100px rgba(255, 255, 255, 0.1);
+}
+
+.flower-layer {
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* Center */
+.center-thumba {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #8B4513 20%, #D2691E 40%, #F4A460 100%);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumba-center {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #4A0E4E, #8B008B);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(139, 0, 139, 0.6);
+}
+
+/* Controls */
+.controls {
+  margin: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 700px;
+}
+
+.controls h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #2e7d32;
+}
+
+.slider-group label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.slider-group input[type="range"] {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.emoji-toggle {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Flower name footer */
+.flower-name {
+  margin: 20px;
+  font-size: 1rem;
+  color: #fdfdfd;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  border-radius: 20px;
 }
