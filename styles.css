@@ -74,6 +74,91 @@ body {
   box-shadow: 0 0 10px rgba(139, 0, 139, 0.6);
 }
 
+/* Petal styles */
+.jasmine-petal {
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  background: linear-gradient(145deg, #FFFFFF 0%, #F8F8FF 50%, #E6E6FA 100%);
+  border-radius: 50% 50% 50% 10%;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lotus-petal {
+  position: absolute;
+  width: 25px;
+  height: 35px;
+  background: linear-gradient(145deg, #FFB6C1 0%, #FFC0CB 30%, #FFFFFF 70%, #F0F8FF 100%);
+  border-radius: 60% 60% 40% 40%;
+  box-shadow: 
+    inset 2px 2px 6px rgba(255, 255, 255, 0.8),
+    inset -1px -1px 3px rgba(255, 182, 193, 0.3),
+    0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.rose-petal {
+  position: absolute;
+  width: 22px;
+  height: 28px;
+  background: linear-gradient(145deg, #DC143C 0%, #FF1493 40%, #FF69B4 80%, #FFB6C1 100%);
+  border-radius: 70% 30% 70% 30%;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 4px rgba(139, 0, 0, 0.3),
+    0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.marigold-petal {
+  position: absolute;
+  width: 18px;
+  height: 25px;
+  background: linear-gradient(145deg, #FF8C00 0%, #FFA500 30%, #FFD700 70%, #FFFF99 100%);
+  border-radius: 40% 60% 40% 60%;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+    inset -1px -1px 3px rgba(255, 140, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.thumba-petal {
+  position: absolute;
+  width: 15px;
+  height: 20px;
+  background: linear-gradient(145deg, #4B0082 0%, #8B008B 40%, #DA70D6 80%, #DDA0DD 100%);
+  border-radius: 50% 50% 30% 30%;
+  box-shadow: 
+    inset 1px 1px 3px rgba(255, 255, 255, 0.3),
+    inset -1px -1px 2px rgba(75, 0, 130, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.chethi-petal {
+  position: absolute;
+  width: 20px;
+  height: 32px;
+  background: linear-gradient(145deg, #8B0000 0%, #DC143C 30%, #FF4500 70%, #FF6347 100%);
+  border-radius: 80% 20% 80% 20%;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+    inset -2px -2px 4px rgba(139, 0, 0, 0.4),
+    0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.sankapushpam-petal {
+  position: absolute;
+  width: 24px;
+  height: 30px;
+  background: linear-gradient(145deg, #F0F8FF 0%, #E0E6FF 30%, #B0C4DE 70%, #87CEEB 100%);
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+    inset -1px -1px 3px rgba(176, 196, 222, 0.3),
+    0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
 /* Controls */
 .controls {
   margin: 20px;
