@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traditional Pookalam — sliders & emoji borders</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+        /* Green background as requested */
+        body{
+            min-height:100vh;
+            display:flex;align-items:center;justify-content:center;
+            background: linear-gradient(135deg,#e6f4ea 0%,#bfe6c8 45%,#9fd39f 100%);
+            padding:18px;
+        }
+
+        .stage{
+            width:960px;max-width:98vw;display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start;
+        }
+
+        .left{display:flex;justify-content:center;align-items:center}
+
+        .pookalam-container{position:relative;width:740px;height:740px;display:flex;justify-content:center;align-items:center}
+
+        .pookalam{position:relative;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle at 35% 25%, rgba(255,255,255,0.06), rgba(0,0,0,0.02));display:flex;justify-content:center;align-items:center;overflow:visible;box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+
+        /* rings container sits behind petals */
+        .rings-container{position:absolute;left:0;top:0;width:100%;height:100%;display:grid;place-items:center;pointer-events:none}
+        .ring{position:absolute;border-radius:50%;pointer-events:none;mix-blend-mode:normal}
+
+        .flower-layer{position:absolute;border-radius:50%;display:flex;justify-content:center;align-items:center;pointer-events:none}
+        .flower-layer-inner{left:50%;top:50%;transform:translate(-50%,-50%);position:absolute}
+
+        /* center thumba */
+        .center-thumba{position:absolute;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,#8B4513 18%,#D2691E 42%,#F4A460 100%);z-index:200;display:flex;justify-content:center;align-items:center}
+        .thumba-center{width:26px;height:26px;background:radial-gradient(circle,#4A0E4E,#8B008B);border-radius:50%;box-shadow:0 0 10px rgba(139,0,139,0.6)}
+
+        /* layer sizes */
+        .layer-1{width:140px;height:140px}
+        .layer-2{width:200px;height:200px}
+        .layer-3{width:270px;height:270px}
+        .layer-4{width:350px;height:350px}
+        .layer-5{width:440px;height:440px}
+        .layer-6{width:540px;height:540px}
+
+        /* petal base */
+        .petal{position:absolute;transform-origin:50% 90%;box-shadow:0 2px 6px rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center}
+
+        .jasmine-petal{width:20px;height:30px;background:linear-gradient(145deg,#FFFFFF 0%,#F8F8FF 50%,#E6E6FA 100%);border-radius:50% 50% 50% 10%}
+        .lotus-petal{width:30px;height:44px;background:linear-gradient(145deg,#FFB6C1 0%,#FFC0CB 30%,#FFFFFF 70%);border-radius:60% 60% 40% 40%}
+        .rose-petal{width:24px;height:32px;background:linear-gradient(145deg,#DC143C 0%,#FF1493 40%,#FF69B4 80%);border-radius:70% 30% 70% 30%}
+        .marigold-petal{width:18px;height:25px;background:linear-gradient(145deg,#FF8C00 0%,#FFA500 30%,#FFD700 70%);border-radius:40% 60% 40% 60%}
+        .thumba-petal{width:16px;height:22px;background:linear-gradient(145deg,#4B0082 0%,#8B008B 40%,#DA70D6 80%);border-radius:50% 50% 30% 30%}
+        .chethi-petal{width:22px;height:34px;background:linear-gradient(145deg,#8B0000 0%,#DC143C 30%,#FF4500 70%);border-radius:80% 20% 80% 20%}
+        .sankapushpam-petal{width:26px;height:34px;background:linear-gradient(145deg,#F0F8FF 0%,#E0E6FF 30%,#B0C4DE 70%);border-radius:50% 50% 20% 20%}
+
+        .flower-center{position:absolute;width:4px;height:4px;background:radial-gradient(circle,#8B4513,#D2691E);border-radius:50%;left:50%;top:14%;transform:translate(-50%,-50%)}
+
+        /* emoji element used as border marker */
+        .emoji-dot{position:absolute;font-size:18px;pointer-events:none;transform-origin:50% 50%;text-shadow:0 2px 4px rgba(0,0,0,0.12)}
+
+        /* scattered flowers */
+        .scattered-flower{position:absolute;width:12px;height:12px}
+
+        /* controls */
+        .controls{background:#fff;border-radius:14px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,0.06);align-self:start}
+        .controls h3{color:#2b5b2b;margin-bottom:8px}
+        .control-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0}
+        .label{flex:1;color:#2b2b2b;font-weight:700}
+        .slider{width:140px}
+        .value-box{min-width:44px;text-align:center;padding:6px 8px;border-radius:8px;background:#fafafa;border:1px solid #eee;font-weight:700}
+        .section{margin-top:12px;padding-top:12px;border-top:1px dashed #eee}
+        .apply-btn{margin-top:8px;padding:8px 12px;border-radius:10px;background:#2f8f3f;color:white;border:none;cursor:pointer;font-weight:700}
+
+        .title{position:absolute;top:20px;font-size:2rem;color:#20521f;z-index:600;font-weight:800}
+        .flower-name{position:absolute;bottom:14px;font-size:1rem;color:#1d4d13;background:rgba(255,255,255,0.9);padding:8px 12px;border-radius:14px;z-index:600;font-weight:700}
+
+        @media (max-width:920px){.stage{grid-template-columns:1fr}.controls{order:2}}
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="left">
+            <div class="pookalam-container">
+                <h1 class="title">🌿 പൂക്കളം 🌿</h1>
+
+                <div class="pookalam" id="pookalam">
+                    <div class="rings-container" id="ringsContainer"></div>
+
+                    <div class="flower-layer layer-6" id="layer6"><div class="flower-layer-inner"></div></div>
+                    <div class="flower-layer layer-5" id="layer5"><div class="flower-layer-inner"></div></div>
+                    <div class="flower-layer layer-4" id="layer4"><div class="flower-layer-inner"></div></div>
+                    <div class="flower-layer layer-3" id="layer3"><div class="flower-layer-inner"></div></div>
+                    <div class="flower-layer layer-2" id="layer2"><div class="flower-layer-inner"></div></div>
+                    <div class="flower-layer layer-1" id="layer1"><div class="flower-layer-inner"></div></div>
+
+                    <div class="center-thumba" id="centerThumba"><div class="thumba-center"></div></div>
+
+                    <div class="flower-name">Traditional Kerala flowers: Jasmine • Lotus • Rose • Marigold • Thumba • Chethi • Sankapushpam</div>
+                </div>
+            </div>
+        </div>
+
+        <aside class="controls" id="controls">
+            <h3>Layer petal sliders & emoji borders</h3>
+
+            <!-- sliders for each layer -->
+            <div class="control-row">
+                <div class="label">Layer 1 — Jasmine</div>
+                <input class="slider" id="s-layer1" type="range" min="4" max="120" step="2" value="16" oninput="onSliderInput('layer1', this.value)" />
+                <div class="value-box" id="val-layer1">16</div>
+            </div>
+
+            <div class="control-row">
+                <div class="label">Layer 2 — Marigold</div>
+                <input class="slider" id="s-layer2" type="range" min="4" max="140" step="2" value="20" oninput="onSliderInput('layer2', this.value)" />
+                <div class="value-box" id="val-layer2">20</div>
+            </div>
+
+            <div class="control-row">
+                <div class="label">Layer 3 — Rose</div>
+                <input class="slider" id="s-layer3" type="range" min="4" max="180" step="2" value="24" oninput="onSliderInput('layer3', this.value)" />
+                <div class="value-box" id="val-layer3">24</div>
+            </div>
+
+            <div class="control-row">
+                <div class="label">Layer 4 — Lotus</div>
+                <input class="slider" id="s-layer4" type="range" min="4" max="200" step="2" value="28" oninput="onSliderInput('layer4', this.value)" />
+                <div class="value-box" id="val-layer4">28</div>
+            </div>
+
+            <div class="control-row">
+                <div class="label">Layer 5 — Chethi</div>
+                <input class="slider" id="s-layer5" type="range" min="4" max="220" step="2" value="32" oninput="onSliderInput('layer5', this.value)" />
+                <div class="value-box" id="val-layer5">32</div>
+            </div>
+
+            <div class="control-row">
+                <div class="label">Layer 6 — Sankapushpam</div>
+                <input class="slider" id="s-layer6" type="range" min="4" max="260" step="2" value="36" oninput="onSliderInput('layer6', this.value)" />
+                <div class="value-box" id="val-layer6">36</div>
+            </div>
+
+            <div class="section">
+                <h3>Concentric rings & emojis</h3>
+                <label class="inline">Rings count / spacing</label>
+                <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+                    <input id="ringsCount" type="number" min="0" max="12" value="4" style="width:80px;padding:6px;border-radius:8px;border:1px solid #ddd" />
+                    <input id="ringsSpacing" type="number" min="8" max="120" value="40" style="width:80px;padding:6px;border-radius:8px;border:1px solid #ddd" />
+                    <button class="apply-btn" onclick="applyRings()">Apply</button>
+                </div>
+
+                <div style="margin-top:8px">
+                    <label class="inline">Ring palette (comma hex)</label>
+                    <input id="ringsPalette" type="text" value="#E6F7E8,#D0F0D6,#B8E9C1,#98D89F" style="width:100%;padding:8px;border-radius:8px;border:1px solid #eee;margin-top:6px" />
+                </div>
+
+                <div style="margin-top:10px;display:flex;gap:8px">
+                    <button class="small-btn" onclick="toggleRings()">Toggle rings</button>
+                    <button class="small-btn" onclick="randomizeRings()">Randomize colors</button>
+                    <button class="small-btn" onclick="toggleEmojiBorder()">Toggle emoji borders</button>
+                </div>
+
+                <div style="margin-top:12px">
+                    <label class="inline">Emoji choices (one per layer, comma separated left→right)</label>
+                    <input id="emojiList" type="text" value="🌸,🌻,🌹,🪷,🌺,💐" style="width:100%;padding:8px;border-radius:8px;border:1px solid #eee;margin-top:6px" />
+                </div>
+
+                <div style="margin-top:10px">
+                    <button class="apply-btn" onclick="randomizeAll()">Randomize petals</button>
+                </div>
+            </div>
+
+            <div style="margin-top:12px;color:#254e22;font-size:0.9rem">Tip: drag sliders to change petal counts. Emoji border places small emoji glyphs around each ring (toggleable).</div>
+        </aside>
+    </div>
+
+    <script>
+        // state
+        const petalCounts = { layer1:16, layer2:20, layer3:24, layer4:28, layer5:32, layer6:36 };
+        const layerToFlower = { layer1:'jasmine', layer2:'marigold', layer3:'rose', layer4:'lotus', layer5:'chethi', layer6:'sankapushpam' };
+        let ringsVisible = true;
+        let emojiBorderOn = true;
+
+        function onSliderInput(layerId, value){
+            const n = Math.max(4, Math.min(400, Math.round(Number(value))));
+            petalCounts[layerId] = n;
+            document.getElementById('val-' + layerId).textContent = n;
+            renderLayer(layerId);
+        }
+
+        function createFlowerPetals(layerId, petalCount, flowerType){
+            const layer = document.getElementById(layerId);
+            if(!layer) return;
+            const inner = layer.querySelector('.flower-layer-inner');
+            inner.innerHTML = '';
+
+            // compute radius from layer size
+            const size = layer.clientWidth || parseInt(getComputedStyle(layer).width) || 200;
+            const baseRadius = (size / 2) - 20;
+
+            for(let i=0;i<petalCount;i++){
+                const petal = document.createElement('div');
+                petal.className = 'petal ' + flowerType + '-petal';
+
+                const center = document.createElement('div'); center.className='flower-center'; petal.appendChild(center);
+
+                const jitter = (Math.random()-0.5)*6;
+                const angle = i*(360/petalCount) + jitter;
+                const rad = angle * Math.PI / 180;
+                const radialJitter = (Math.random()-0.5)*14;
+                const petalRadius = baseRadius + radialJitter;
+                const x = Math.cos(rad)*petalRadius;
+                const y = Math.sin(rad)*petalRadius;
+
+                petal.style.position='absolute';
+                petal.style.left='50%'; petal.style.top='50%';
+                petal.style.transform = `translate(-50%,-50%) translate(${x}px, ${y}px) rotate(${angle+90}deg)`;
+                petal.style.zIndex = 50 + Number(layerId.replace('layer',''));
+                inner.appendChild(petal);
+            }
+
+            // after petals, update emoji border for this layer if enabled
+            if(emojiBorderOn) createEmojiBorderForLayer(layerId, petalCount);
+            else removeEmojiBorderForLayer(layerId);
+        }
+
+        function renderLayer(layerId){
+            const flowerType = layerToFlower[layerId];
+            createFlowerPetals(layerId, petalCounts[layerId], flowerType);
+        }
+
+        function renderAllLayers(){
+            Object.keys(petalCounts).forEach(k => renderLayer(k));
+            createScatteredFlowers();
+            populateCenterThumba(12);
+        }
+
+        // scattered
+        function createScatteredFlowers(){
+            document.querySelectorAll('.scattered-flower').forEach(el=>el.remove());
+            const container = document.getElementById('pookalam');
+            const flowerTypes = ['jasmine','marigold','thumba'];
+            for(let i=0;i<14;i++){
+                const el = document.createElement('div');
+                const ft = flowerTypes[Math.floor(Math.random()*flowerTypes.length)];
+                el.className = 'scattered-flower ' + ft + '-petal';
+                const angle = Math.random()*360; const rad = angle*Math.PI/180; const radius=220+Math.random()*160;
+                const x=Math.cos(rad)*radius; const y=Math.sin(rad)*radius;
+                el.style.left='50%'; el.style.top='50%'; el.style.position='absolute'; el.style.transform=`translate(-50%,-50%) translate(${x}px, ${y}px) rotate(${angle}deg)`;
+                el.style.zIndex=20; el.style.opacity=0.96; container.appendChild(el);
+            }
+        }
+
+        // center thumba
+        function populateCenterThumba(count=12){
+            const center = document.getElementById('centerThumba');
+            Array.from(center.querySelectorAll('.thumba-instance')).forEach(e=>e.remove());
+            for(let i=0;i<count;i++){
+                const p = document.createElement('div'); p.className='thumba-petal thumba-instance';
+                const angle = (i*360)/count; const rad = angle*Math.PI/180; const x=Math.cos(rad)*38; const y=Math.sin(rad)*38;
+                p.style.left='50%'; p.style.top='50%'; p.style.position='absolute'; p.style.transform=`translate(-50%,-50%) translate(${x}px, ${y}px) rotate(${angle+90}deg)`; p.style.zIndex=201; center.appendChild(p);
+            }
+        }
+
+        /* --- emoji border helpers --- */
+        function createEmojiBorderForLayer(layerId, count){
+            // remove existing emoji dots for this layer first
+            removeEmojiBorderForLayer(layerId);
+            const layer = document.getElementById(layerId);
+            const inner = layer.querySelector('.flower-layer-inner');
+            if(!layer || !inner) return;
+
+            // emoji list from input (6 items ideally)
+            const emojis = document.getElementById('emojiList').value.split(',').map(s=>s.trim()).filter(Boolean);
+            // select emoji for this layer by index (layer1 -> emojis[0], ...)
+            const idx = Number(layerId.replace('layer','')) - 1;
+            const emoji = (emojis[idx] || '🌸');
+
+            const size = layer.clientWidth || parseInt(getComputedStyle(layer).width) || 200;
+            const baseRadius = (size / 2) - 6; // slightly outside petals
+            const emojiOffset = 18; // push further out
+            const emojiRadius = baseRadius + emojiOffset;
+
+            const elements = [];
+            // place same number as petalCount but spaced evenly (or choose fewer to avoid clutter)
+            const dots = Math.max(6, Math.min(60, Math.round(count/1))); // cap
+            for(let i=0;i<dots;i++){
+                const angle = i*(360/dots);
+                const rad = angle*Math.PI/180;
+                const x = Math.cos(rad)*emojiRadius;
+                const y = Math.sin(rad)*emojiRadius;
+                const span = document.createElement('div');
+                span.className = 'emoji-dot emoji-'+layerId;
+                span.dataset.layer = layerId;
+                span.textContent = emoji;
+                span.style.left = '50%'; span.style.top='50%'; span.style.position='absolute';
+                span.style.transform = `translate(-50%,-50%) translate(${x}px, ${y}px) rotate(${angle}deg)`;
+                span.style.zIndex = 80 + Number(idx);
+                // scale slightly random for organic look
+                span.style.fontSize = (14 + Math.round(Math.random()*8)) + 'px';
+                inner.appendChild(span);
+                elements.push(span);
+            }
+        }
+
+        function removeEmojiBorderForLayer(layerId){
+            const layer = document.getElementById(layerId);
+            if(!layer) return;
+            const inner = layer.querySelector('.flower-layer-inner');
+            Array.from(inner.querySelectorAll('.emoji-dot')).forEach(e=>e.remove());
+        }
+
+        function toggleEmojiBorder(){
+            emojiBorderOn = !emojiBorderOn;
+            if(!emojiBorderOn){
+                // remove all
+                document.querySelectorAll('.emoji-dot').forEach(e=>e.remove());
+            } else {
+                // recreate for each layer
+                Object.keys(petalCounts).forEach(layerId => createEmojiBorderForLayer(layerId, petalCounts[layerId]));
+            }
+        }
+
+        /* --- rings --- */
+        function applyRings(){
+            const ringsContainer = document.getElementById('ringsContainer'); ringsContainer.innerHTML='';
+            const count = parseInt(document.getElementById('ringsCount').value,10) || 0;
+            const spacing = parseInt(document.getElementById('ringsSpacing').value,10) || 40;
+            let palette = document.getElementById('ringsPalette').value || '';
+            palette = palette.split(',').map(s=>s.trim()).filter(Boolean);
+            if(palette.length===0) palette=['#E6F7E8','#D0F0D6','#B8E9C1','#98D89F'];
+            const baseSize = 600;
+            for(let i=0;i<count;i++){
+                const ring = document.createElement('div'); ring.className='ring';
+                const size = baseSize - i*spacing*2; if(size<=0) continue;
+                ring.style.width=size+'px'; ring.style.height=size+'px'; ring.style.zIndex=1+i;
+                const color = palette[i % palette.length] || '#E6F7E8';
+                ring.style.background = `radial-gradient(circle at 45% 40%, ${hexToRgba(color,0.24)} 0%, ${hexToRgba(color,0.12)} 45%, transparent 70%)`;
+                ring.style.border = `1px solid ${hexToRgba(color,0.16)}`; ring.style.opacity = 0.96 - i*0.06; ring.style.filter='blur(0.6px)'; ringsContainer.appendChild(ring);
+            }
+            ringsVisible = count>0;
+            ringsContainer.style.display = ringsVisible ? 'block' : 'none';
+
+            // After rings applied, recreate emoji borders so they align nicely
+            if(emojiBorderOn){ Object.keys(petalCounts).forEach(layerId=>createEmojiBorderForLayer(layerId, petalCounts[layerId])); }
+        }
+
+        function toggleRings(){ ringsVisible = !ringsVisible; document.getElementById('ringsContainer').style.display = ringsVisible ? 'block' : 'none'; }
+        function randomizeRings(){ const palettes = [ ['#E6F7E8','#D0F0D6','#B8E9C1','#98D89F'], ['#FFF6E6','#FFE5C2','#FFD19A','#FFB86B'], ['#F0F7FF','#D9EEFF','#BFDFFF','#A0D1FF'] ]; const p=palettes[Math.floor(Math.random()*palettes.length)]; document.getElementById('ringsPalette').value=p.join(','); applyRings(); }
+
+        function hexToRgba(hex,alpha=1){ const h=hex.replace('#',''); if(h.length===3){ const r=parseInt(h[0]+h[0],16); const g=parseInt(h[1]+h[1],16); const b=parseInt(h[2]+h[2],16); return `rgba(${r},${g},${b},${alpha})`; } else if(h.length===6){ const r=parseInt(h.slice(0,2),16); const g=parseInt(h.slice(2,4),16); const b=parseInt(h.slice(4,6),16); return `rgba(${r},${g},${b},${alpha})`; } else return `rgba(255,255,255,${alpha})`; }
+
+        /* --- randomize --- */
+        function randomizeAll(){ Object.keys(petalCounts).forEach(k=>{ const val = 6 + Math.floor(Math.random()*40)*2; petalCounts[k]=val; document.getElementById('val-'+k).textContent=val; document.getElementById('s-'+k).value=val; }); renderAllLayers(); }
+
+        /* --- initialization --- */
+        document.addEventListener('DOMContentLoaded', ()=>{
+            // center layers
+            document.querySelectorAll('.flower-layer').forEach(layer=>{ layer.style.left='50%'; layer.style.top='50%'; layer.style.transform='translate(-50%,-50%)'; });
+
+            renderAllLayers(); applyRings();
+        });
+
+        // expose to console
+        window.onSliderInput = onSliderInput; window.applyRings = applyRings; window.toggleRings = toggleRings; window.randomizeRings = randomizeRings; window.randomizeAll = randomizeAll; window.toggleEmojiBorder = toggleEmojiBorder;
+    </script>
+</body>
+</html>
