@@ -68,3 +68,4 @@ let showEmojis = true;
 
 // Run
 init();
+
