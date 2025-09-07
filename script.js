@@ -1,6 +1,19 @@
-// state
-const petalCounts = { layer1:16, layer2:20, layer3:24, layer4:28, layer5:32, layer6:36 };
-const layerToFlower = { layer1:'jasmine', layer2:'marigold', layer3:'rose', layer4:'lotus', layer5:'chethi', layer6:'sankapushpam' };
+const petalCounts = { 
+    layer1:40, 
+    layer2:60, 
+    layer3:80, 
+    layer4:100, 
+    layer5:120, 
+    layer6:140 
+};
+const layerToFlower = { 
+    layer1:'jasmine', 
+    layer2:'marigold', 
+    layer3:'rose', 
+    layer4:'lotus', 
+    layer5:'chethi', 
+    layer6:'sankapushpam' 
+};
 let ringsVisible = true;
 let emojiBorderOn = true;
 
@@ -20,12 +33,12 @@ function createFlowerPetals(layerId, petalCount, flowerType){
     const size = layer.clientWidth || parseInt(getComputedStyle(layer).width) || 200;
     const baseRadius = (size / 2) - 20;
 
-    for(let i=0;i<petalCount;i++){
+    for(let i=0; i<petalCount; i++){
         const petal = document.createElement('div');
         petal.className = 'petal ' + flowerType + '-petal';
 
         const center = document.createElement('div');
-        center.className='flower-center';
+        center.className = 'flower-center';
         petal.appendChild(center);
 
         const jitter = (Math.random()-0.5)*6;
@@ -36,9 +49,9 @@ function createFlowerPetals(layerId, petalCount, flowerType){
         const x = Math.cos(rad)*petalRadius;
         const y = Math.sin(rad)*petalRadius;
 
-        petal.style.position='absolute';
-        petal.style.left='50%';
-        petal.style.top='50%';
+        petal.style.position = 'absolute';
+        petal.style.left = '50%';
+        petal.style.top = '50%';
         petal.style.transform = `translate(-50%,-50%) translate(${x}px, ${y}px) rotate(${angle+90}deg)`;
         petal.style.zIndex = 50 + Number(layerId.replace('layer',''));
         inner.appendChild(petal);
@@ -90,4 +103,27 @@ function populateCenterThumba(count=12){
         p.className='thumba-petal thumba-instance';
         const angle = (i*360)/count;
         const rad = angle*Math.PI/180;
-        const x=Math.cos(rad
+        const radius = 20 + Math.random() * 10;
+        const x = Math.cos(rad)*radius;
+        const y = Math.sin(rad)*radius;
+        p.style.left = '50%';
+        p.style.top = '50%';
+        p.style.position = 'absolute';
+        p.style.transform = `translate(-50%,-50%) translate(${x}px, ${y}px) rotate(${angle}deg)`;
+        p.style.opacity = 0.8 + Math.random()*0.2;
+        center.appendChild(p);
+    }
+}
+
+// Placeholder functions (implement if needed)
+function createEmojiBorderForLayer(layerId, petalCount){
+    // Implementation here if required
+}
+function removeEmojiBorderForLayer(layerId){
+    // Implementation here if required
+}
+
+// Initialize rendering on page load
+window.onload = () => {
+    renderAllLayers();
+};
