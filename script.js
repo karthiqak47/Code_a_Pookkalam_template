@@ -115,12 +115,50 @@ function populateCenterThumba(count=12){
     }
 }
 
-// Placeholder functions (implement if needed)
 function createEmojiBorderForLayer(layerId, petalCount){
-    // Implementation here if required
+    const layer = document.getElementById(layerId);
+    if(!layer) return;
+    const old = layer.querySelectorAll('.emoji-dot');
+    old.forEach(e => e.remove());
+
+    const inner = layer.querySelector('.flower-layer-inner');
+    const size = layer.clientWidth || parseInt(getComputedStyle(layer).width) || 200;
+    const radius = (size / 2) - 10;
+
+    for(let i=0; i<petalCount; i++){
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji-dot';
+        emoji.textContent = '🌸';
+        const angle = i * (360 / petalCount);
+        const rad = angle * Math.PI / 180;
+        const x = Math.cos(rad) * radius;
+        const y = Math.sin(rad) * radius;
+        emoji.style.left = '50%';
+        emoji.style.top = '50%';
+        emoji.style.transform = `translate(-50%,-50%) translate(${x}px, ${y}px) rotate(${angle}deg)`;
+        inner.appendChild(emoji);
+    }
 }
+
 function removeEmojiBorderForLayer(layerId){
-    // Implementation here if required
+    const layer = document.getElementById(layerId);
+    if(!layer) return;
+    const old = layer.querySelectorAll('.emoji-dot');
+    old.forEach(e => e.remove());
+}
+
+function toggleEmoji(){
+    emojiBorderOn = !emojiBorderOn;
+    renderAllLayers();
+}
+
+function randomizePetals(){
+    Object.keys(petalCounts).forEach(layerId => {
+        const randomCount = 10 + Math.floor(Math.random() * 50);
+        petalCounts[layerId] = randomCount;
+        document.getElementById('val-' + layerId).textContent = randomCount;
+    });
+    renderAllLayers();
 }
 
 // Initialize rendering on page load
