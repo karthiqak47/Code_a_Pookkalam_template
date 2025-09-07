@@ -3,17 +3,17 @@
 A digital version of the traditional **Onam Pookkalam** 🪷, created entirely using **HTML, CSS, and JavaScript**.  
 This project lets you experiment with petal arrangements, emoji borders, and concentric rings — bringing the festival spirit online! 🎉
 
----
+---(( If site is misbehaving  use main.html file in main branch and execute in html viewer online.))
+
 
 ## 🌿 Live Demo
-👉 [View my Pookkalam here](https://your-username.github.io/code-a-pookkalam/)  
-*(replace `your-username` and repo name once GitHub Pages is enabled)*
+👉 [View my Pookkalam here](https://karthiqak47.github.io/Code_a_Pookkalam_template/)  
 
----
+
+
 
 ## 🖼️ Preview
 ![Preview of Pookkalam](screenshot.png)  
-*(Take a screenshot of your design, save it as `screenshot.png` in the repo root, and it will show up here)*
 
 ---
 
@@ -24,6 +24,3 @@ This project lets you experiment with petal arrangements, emoji borders, and con
 - Beautiful green background inspired by Onam traditions 🌿  
 - Works directly in the browser, no installation needed  
 
----
-
-## 📂 Project Structure
